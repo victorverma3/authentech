@@ -11,11 +11,14 @@ const Activity = () => {
     const [organization, setOrganization] = useState("Choose");
     const [activity, setActivity] = useState("Choose");
     const [year, setYear] = useState(null);
+    const [name, setName] = useState("Thomas Yousef");
     const [position, setPosition] = useState(null);
     const [description, setDescription] = useState("");
 
     const [organizations, setOrganizations] = useState(null);
     const [activities, setActivities] = useState(null);
+
+    const [verification, setVerification] = useState(0);
 
     useEffect(() => {
         axios
@@ -51,18 +54,36 @@ const Activity = () => {
             organizationName: organization,
             activityName: activity,
             year: year,
-            name: "Thomas Yousef",
+            name: name,
             position: position,
         };
         console.log(parameters);
         axios
             .post(`${backend}/verify`, parameters)
             .then((response) => {
-                console.log(response);
+                console.log(response.data);
+                setVerification(response.data);
             })
             .catch((error) => {
                 console.log(error);
             });
+        if (verification === 1) {
+            const activityParameters = {
+                name: name,
+                organization: organization,
+                activity: activity,
+                year: year,
+                position: position,
+            };
+            axios
+                .post(`${backend}/activities/add-activity`, activityParameters)
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     };
 
     return (

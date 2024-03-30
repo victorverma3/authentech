@@ -5,6 +5,7 @@ import cors from "cors";
 
 import orgRoute from "./routes/orgRoute.js";
 import verifyRoute from "./routes/verifyRoute.js";
+import userActivityRoute from "./routes/userActivityRoute.js";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use("/organizations", orgRoute);
 app.use("/verify", verifyRoute);
+app.use("/activities/", userActivityRoute);
 
 app.get("/", (request, response) => {
     console.log(request);

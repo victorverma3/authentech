@@ -1,0 +1,21 @@
+.dropdown-container {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.dropdown-container select {
+    width: 100%; 
+    padding: 8px; 
+    border: 2px solid #112ab5; 
+    border-radius: 20px; 
+}
+
+.labels {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+}
+

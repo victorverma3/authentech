@@ -46,6 +46,7 @@ const Home = () => {
                 }}
             >
                 <table className="table-auto" style={{ width: "100%" }}>
+
                     <thead>
                         <tr>
                             <th className="border border-slate-700 rounded-md text-center">

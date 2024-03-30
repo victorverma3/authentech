@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -30,7 +30,8 @@ const Activity = () => {
     }, []);
 
     useEffect(() => {
-        if (organization) {
+        setActivity("Choose");
+        if (organization !== "Choose") {
             axios
                 .get(`${backend}/organizations/${organization}/activities`)
                 .then((response) => {
@@ -87,7 +88,7 @@ const Activity = () => {
                         </select>
                     </div>
                 )}
-                {activities !== null && (
+                {activities !== null && organization !== "Choose" && (
                     <div className="mb-3">
                         <label htmlFor="activity" className="form-label">
                             Activity
@@ -113,7 +114,7 @@ const Activity = () => {
                     <input
                         type="text"
                         className="form-control"
-                        id="position"
+                        id="year"
                         value={year || ""}
                         onChange={(e) => setYear(e.target.value)}
                     />

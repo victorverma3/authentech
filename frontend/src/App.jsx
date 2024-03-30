@@ -3,14 +3,7 @@
 import { Routes, Route } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import Home from './home.jsx'
-// layout and home
-import Layout from "./Layout";
-
-// main app
-
-import { Routes, Route } from "react-router-dom";
-import { SnackbarProvider } from "notistack";
-
+import Activity from "./activity.jsx";
 // layout and home
 import Layout from "./Layout";
 
@@ -20,13 +13,17 @@ import "./App.css";
 // creates routings of app --> used for sending pages when requested
 const App = () => {
     return (
-        <div>
+        <div >
             <SnackbarProvider>
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
                         <Route path="*" element={<Error />} />
                     </Route>
+                    <Route path="/add-activity" element={<Layout />}>
+                        <Route index element={<Activity />} />
+                    </Route>
+
                 </Routes>
             </SnackbarProvider>
         </div>

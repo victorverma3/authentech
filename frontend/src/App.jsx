@@ -1,3 +1,13 @@
+
+
+import { Routes, Route } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
+import Home from './home.jsx'
+// layout and home
+import Layout from "./Layout";
+
+// main app
+
 import { Routes, Route } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 

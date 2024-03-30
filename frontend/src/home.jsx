@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaTrash } from 'react-icons/fa';
-
 const backend = import.meta.env.VITE_BACKEND_URL;
 
-
 const Home = () => {
-      
     const [name, setName] = useState("Thomas Yousef");
     const [activities, setActivities] = useState(null);
     useEffect(() => {
@@ -55,8 +52,6 @@ const Home = () => {
                 </table>
             </div>
 
-            
-
             <Link to="/add-activity">
                 <button
                     style={{
@@ -82,4 +77,5 @@ const Home = () => {
 };
 
 
-export default Home
+
+export default Home;

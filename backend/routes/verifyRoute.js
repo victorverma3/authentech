@@ -8,6 +8,7 @@ const router = express.Router();
 router.post("/", async (request, response) => {
     const { organizationName, activityName, year, name, position } =
         request.body;
+    console.log("verification request", request.body);
     try {
         const entry = await org
             .findOne({
@@ -16,18 +17,18 @@ router.post("/", async (request, response) => {
             })
             .lean();
         if (!entry) {
-            return response.status(404).json(0);
+            return response.status(200).json(0);
         }
         const members = entry.activities[activityName][year];
         if (!members) {
-            return response.status(404).json(0);
+            return response.status(200).json(0);
         }
         for (const member of members) {
             if (member.name === name && member.position === position) {
                 return response.status(200).json(1);
             }
         }
-        return response.status(404).json(0);
+        return response.status(200).json(0);
     } catch (error) {
         console.log(error.message);
         response.status(500).send({ message: error.message });

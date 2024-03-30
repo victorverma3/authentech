@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash } from "react-icons/fa";
 const backend = import.meta.env.VITE_BACKEND_URL;
 
 const Home = () => {
-    const [name, setName] = useState("Thomas Yousef");
+    const name = "Thomas Yousef";
     const [activities, setActivities] = useState(null);
     useEffect(() => {
         const parameters = { name: name };
         axios
             .post(`${backend}/activities`, parameters)
             .then((response) => {
-                setActivities(response.data.data);
                 console.log(response.data);
+                setActivities(response.data.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -23,31 +23,63 @@ const Home = () => {
         <div>
             <h1>Activities</h1>
 
-            <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: "20px",
+                }}
+            >
                 <table className="table-auto">
                     <thead>
-                    <tr>
-                        <th className="border border-slate-700 rounded-md text-center">Index</th>
-                        <th className="border border-slate-700 rounded-md text-center">Organization</th>
-                        <th className="border border-slate-700 rounded-md text-center max-md:hidden">Activity</th>
-                        <th className="border border-slate-700 rounded-md text-center max-md:hidden">Position</th>
-                        <th className="border border-slate-700 rounded-md text-center max-md:hidden">Year</th>
-                        <th className="border border-slate-700 rounded-md text-center max-md:hidden">Name</th>
-                    </tr>
+                        <tr>
+                            <th className="border border-slate-700 rounded-md text-center">
+                                Index
+                            </th>
+                            <th className="border border-slate-700 rounded-md text-center">
+                                Organization
+                            </th>
+                            <th className="border border-slate-700 rounded-md text-center max-md:hidden">
+                                Activity
+                            </th>
+                            <th className="border border-slate-700 rounded-md text-center max-md:hidden">
+                                Position
+                            </th>
+                            <th className="border border-slate-700 rounded-md text-center max-md:hidden">
+                                Year
+                            </th>
+                            <th className="border border-slate-700 rounded-md text-center max-md:hidden">
+                                Name
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {activities.map((activities, index) => (
-                        <tr key={activities._id} className="h-8">
-                            <td className="border border-slate-700 rounded-md text-center">{index + 1}</td>
-                            <td className="border border-slate-700 rounded-md text-center">{activities.organization}</td>
-                            <td className="border border-slate-700 rounded-md text-center max-md:hidden">{activities.activity}</td>
-                            <td className="border border-slate-700 rounded-md text-center max-md:hidden">{activities.position}</td>
-                            <td className="border border-slate-700 rounded-md text-center max-md:hidden">{activities.year}</td>
-                            <td className="border border-slate-700 rounded-md text-center max-md:hidden">{activities.name}</td>
-                            <td className="rounded-md text-center max-md:hidden"><FaTrash /></td>
-                        </tr>
-                    ))}
-
+                        {activities &&
+                            activities.map((activities, index) => (
+                                <tr key={activities._id} className="h-8">
+                                    <td className="border border-slate-700 rounded-md text-center">
+                                        {index + 1}
+                                    </td>
+                                    <td className="border border-slate-700 rounded-md text-center">
+                                        {activities.organization}
+                                    </td>
+                                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">
+                                        {activities.activity}
+                                    </td>
+                                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">
+                                        {activities.position}
+                                    </td>
+                                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">
+                                        {activities.year}
+                                    </td>
+                                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">
+                                        {activities.name}
+                                    </td>
+                                    <td className="rounded-md text-center max-md:hidden">
+                                        <FaTrash />
+                                    </td>
+                                </tr>
+                            ))}
                     </tbody>
                 </table>
             </div>
@@ -70,12 +102,8 @@ const Home = () => {
                     Add Activity
                 </button>
             </Link>
-
-            
         </div>
     );
 };
-
-
 
 export default Home;

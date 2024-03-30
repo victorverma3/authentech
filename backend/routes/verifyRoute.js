@@ -18,7 +18,7 @@ router.post("/", async (request, response) => {
         if (!entry) {
             return response.status(404).json(0);
         }
-        const members = entry["activities"][activityName][year];
+        const members = entry.activities[activityName][year];
         if (!members) {
             return response.status(404).json(0);
         }

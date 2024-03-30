@@ -10,8 +10,8 @@ router.get("/", async (request, response) => {
         const orgElements = await org.find({}).lean();
         const orgValues = orgElements.map((element) => element.organization);
         return response.status(200).json({
-            count: orgElements.length,
-            data: orgElements,
+            count: orgValues.length,
+            data: orgValues,
         });
     } catch (error) {
         console.log(error.message);

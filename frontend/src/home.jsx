@@ -34,6 +34,8 @@ const Home = () => {
     };
     return (
         <div>
+            
+            <h1>Welcome Back, Thomas Yousef</h1>
             <h1>Activities</h1>
 
             <div
@@ -43,7 +45,8 @@ const Home = () => {
                     padding: "20px",
                 }}
             >
-                <table className="table-auto">
+                <table className="table-auto" style={{ width: "100%" }}>
+
                     <thead>
                         <tr>
                             <th className="border border-slate-700 rounded-md text-center">

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,6 +19,8 @@ const Activity = () => {
     const [activities, setActivities] = useState(null);
 
     const [verification, setVerification] = useState(0);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
@@ -79,6 +81,7 @@ const Activity = () => {
                 .post(`${backend}/activities/add-activity`, activityParameters)
                 .then((response) => {
                     console.log(response);
+                    navigate("/");
                 })
                 .catch((error) => {
                     console.log(error);

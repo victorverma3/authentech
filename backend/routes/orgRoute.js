@@ -19,6 +19,45 @@ router.get("/", async (request, response) => {
     }
 });
 
+// create an organization
+router.post("/create-organization", async (request, response) => {
+    console.log(request.body);
+    try {
+        const newOrg = new org({
+            organization: request.body.organization,
+            activities: request.body.activities,
+        });
+        console.log(newOrg);
+        await newOrg.save();
+        return response
+            .status(200)
+            .send({ message: "Added organization successfully" });
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
+
+// delete organization
+router.delete(
+    "/delete-organization/:organization",
+    async (request, response) => {
+        try {
+            const deletedOrganization = await org.deleteMany({
+                organization: request.params.organization,
+            });
+            if (deletedOrganization) {
+                return response
+                    .status(200)
+                    .send({ message: "Deleted organization successfully" });
+            }
+        } catch (error) {
+            console.log(error.message);
+            response.status(500).send({ message: error.message });
+        }
+    }
+);
+
 // get all activities for an organization
 router.get("/:organization/activities", async (request, response) => {
     const organizationName = request.params.organization;

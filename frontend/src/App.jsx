@@ -3,6 +3,8 @@ import { SnackbarProvider } from "notistack";
 import Home from "./home.jsx";
 import Activity from "./activity.jsx";
 import Layout from "./Layout";
+import OrganizerView from "./OrganizerView.jsx";
+import CreateOrganization from "./CreateOrganization.jsx";
 
 // main app
 import "./App.css";
@@ -19,6 +21,10 @@ const App = () => {
                     </Route>
                     <Route path="/add-activity" element={<Layout />}>
                         <Route index element={<Activity />} />
+                    </Route>
+                    <Route path="/organizer" element={<Layout />}>
+                        <Route index element={<OrganizerView/>} />
+                        <Route path="/organizer/create-org/" element={<CreateOrganization/>} />
                     </Route>
                 </Routes>
             </SnackbarProvider>

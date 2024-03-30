@@ -91,7 +91,10 @@ const Home = () => {
                                                 deleteActivity(activities._id)
                                             }
                                         >
-                                            <FaTrash />
+                                            <Link >
+                                                <FaTrash />
+                                            </Link>
+                                            
                                         </td>
                                     </a>
                                 </tr>

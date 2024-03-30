@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 const backend = import.meta.env.VITE_BACKEND_URL;
@@ -7,7 +7,6 @@ const backend = import.meta.env.VITE_BACKEND_URL;
 const Home = () => {
     const name = "Thomas Yousef";
     const [activities, setActivities] = useState(null);
-    const navigate = useNavigate();
     useEffect(() => {
         const parameters = { name: name };
         axios

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 const backend = import.meta.env.VITE_BACKEND_URL;
@@ -7,6 +7,7 @@ const backend = import.meta.env.VITE_BACKEND_URL;
 const Home = () => {
     const name = "Thomas Yousef";
     const [activities, setActivities] = useState(null);
+    const navigate = useNavigate();
     useEffect(() => {
         const parameters = { name: name };
         axios
@@ -19,6 +20,18 @@ const Home = () => {
                 console.log(error);
             });
     }, [name]);
+    const deleteActivity = (id) => {
+        console.log(id);
+        axios
+            .delete(`${backend}/activities/delete-activity/${id}`)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        window.location.reload();
+    };
     return (
         <div>
             <h1>Activities</h1>
@@ -48,9 +61,6 @@ const Home = () => {
                             <th className="border border-slate-700 rounded-md text-center max-md:hidden">
                                 Year
                             </th>
-                            <th className="border border-slate-700 rounded-md text-center max-md:hidden">
-                                Name
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,12 +82,16 @@ const Home = () => {
                                     <td className="border border-slate-700 rounded-md text-center max-md:hidden">
                                         {activities.year}
                                     </td>
-                                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                                        {activities.name}
-                                    </td>
-                                    <td className="rounded-md text-center max-md:hidden">
-                                        <FaTrash />
-                                    </td>
+                                    <a>
+                                        <td
+                                            className="rounded-md text-center max-md:hidden"
+                                            onClick={() =>
+                                                deleteActivity(activities._id)
+                                            }
+                                        >
+                                            <FaTrash />
+                                        </td>
+                                    </a>
                                 </tr>
                             ))}
                     </tbody>

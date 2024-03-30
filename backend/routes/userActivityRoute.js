@@ -7,7 +7,6 @@ const router = express.Router();
 // get all student activities
 router.post("/", async (request, response) => {
     const { name } = request.body;
-    console.log(name);
     try {
         const userActivities = await userActivity.find({ name: name });
         return response.status(200).json({
@@ -44,6 +43,7 @@ router.post("/add-activity", async (request, response) => {
 
 // delete student activity
 router.delete("/delete-activity/:id", async (request, response) => {
+    console.log(request.params.id);
     try {
         const deletedActivity = await userActivity.findByIdAndDelete(
             request.params.id

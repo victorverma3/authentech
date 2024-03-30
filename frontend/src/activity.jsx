@@ -4,7 +4,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import "./activity.css"
+import "./activity.css";
 
 const backend = import.meta.env.VITE_BACKEND_URL;
 
@@ -12,14 +12,12 @@ const Activity = () => {
     const [organization, setOrganization] = useState("Choose");
     const [activity, setActivity] = useState("Choose");
     const [year, setYear] = useState(null);
-    const [name, setName] = useState("Thomas Yousef");
+    const name = "Thomas Yousef";
     const [position, setPosition] = useState(null);
     const [description, setDescription] = useState("");
 
     const [organizations, setOrganizations] = useState(null);
     const [activities, setActivities] = useState(null);
-
-    const [verification, setVerification] = useState(0);
 
     const navigate = useNavigate();
 
@@ -65,45 +63,52 @@ const Activity = () => {
             .post(`${backend}/verify`, parameters)
             .then((response) => {
                 console.log(response.data);
-                setVerification(response.data);
+                if (response.data === 1) {
+                    const activityParameters = {
+                        name: name,
+                        organization: organization,
+                        activity: activity,
+                        year: year,
+                        position: position,
+                    };
+                    axios
+                        .post(
+                            `${backend}/activities/add-activity`,
+                            activityParameters
+                        )
+                        .then((response) => {
+                            console.log(response);
+                            navigate("/");
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }
             })
             .catch((error) => {
                 console.log(error);
             });
-        if (verification === 1) {
-            const activityParameters = {
-                name: name,
-                organization: organization,
-                activity: activity,
-                year: year,
-                position: position,
-            };
-            axios
-                .post(`${backend}/activities/add-activity`, activityParameters)
-                .then((response) => {
-                    console.log(response);
-                    navigate("/");
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
     };
 
     return (
         <div className="container mt-5">
             <h1>Activity Section</h1>
             <form onSubmit={handleSubmit}>
-                <div className = "dropdown-container"> 
+                <div className="dropdown-container">
                     {organizations !== null && (
                         <div className="mb-3">
-                            <label htmlFor="organization" className="form-label">
+                            <label
+                                htmlFor="organization"
+                                className="form-label"
+                            >
                                 Organization
                             </label>
                             <select
                                 className="dropdown-container"
                                 value={organization || ""}
-                                onChange={(e) => setOrganization(e.target.value)}
+                                onChange={(e) =>
+                                    setOrganization(e.target.value)
+                                }
                             >
                                 <option value={null}>Choose</option>
                                 {organizations.map((value) => (
@@ -134,7 +139,7 @@ const Activity = () => {
                         </div>
                     )}
                 </div>
-                <div className = "labels">
+                <div className="labels">
                     <div className="mb-3">
                         <label htmlFor="year" className="form-label">
                             Year

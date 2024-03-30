@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use("/organizations", orgRoute);
 app.use("/verify", verifyRoute);
-app.use("/activities/", userActivityRoute);
+app.use("/activities", userActivityRoute);
 
 app.get("/", (request, response) => {
     console.log(request);

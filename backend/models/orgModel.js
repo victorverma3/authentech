@@ -18,12 +18,10 @@ const orgSchema = mongoose.Schema({
     },
     activities: {
         type: Map,
-        of: [
-            {
-                type: Map,
-                of: [memberSchema],
-            },
-        ],
+        of: {
+            type: Map,
+            of: [memberSchema],
+        },
     },
 });
 

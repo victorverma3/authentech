@@ -1,6 +1,16 @@
+<<<<<<< Updated upstream
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
+=======
+import { Routes, Route } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
+import Home from './home.jsx'
+// layout and home
+import Layout from "./Layout";
+
+// main app
+>>>>>>> Stashed changes
 import "./App.css";
 
 function App() {
